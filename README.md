@@ -1,8 +1,8 @@
 # -此项目为本人个人解答的所有分析学名著和问题的总和。
 包括如下内容:
-\par
-《数学分析》
-《Fourier分析》
+
+《数学分析》: 梅加强《数学分析》, Terence Tao《Analysis》, Walter Rudin 《Mathematical Analysis》, Apostol 《Mathematical Analyisis》
+《Fourier分析》:Stein Fourier Analysis
 《复分析》
 《实分析》
 《泛函分析》
