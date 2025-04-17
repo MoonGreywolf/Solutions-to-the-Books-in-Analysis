@@ -1,0 +1,68 @@
+\documentclass[12pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, color, framed, graphicx, hyperref, mathrsfs}
+
+\title{\textbf{一个微分中值定理的妙用}}
+\author{张浩然}
+\date{\today}
+\linespread{1.5}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\par}
+
+\begin{document}
+
+\maketitle
+
+
+
+\begin{problem}
+
+设 $a_i, b_i \geq M > 0$，且 $|a_i - b_i| \leq \varepsilon$，
+其中 $i = 1, 2, \ldots, n$.证明：
+$$
+\left|\prod_{i=1}^{n}\dfrac{1}{a_i} -\prod_{i=1}^{n}\dfrac{1}{b_i} \right|\leqslant \dfrac{n\varepsilon}{M^{n+1}}
+$$
+
+\end{problem}
+
+\begin{solution}
+  \par
+  我们考虑一个多元函数，$$
+f(x)=\prod_{i=1}^{n}\dfrac{1}{x_i},\quad 
+$$
+\par
+其中，
+$$
+x=(x_1,x_2,\cdots,x_n)^t, x_i\geqslant M, 1\leqslant i\leqslant n
+  $$
+\par
+考虑多元函数微分中值定理：
+$$
+f(a)-f(b)=\nabla f(\xi)\cdot(a-b)
+$$
+\par
+展开为:
+$$
+\prod_{i=1}^{n}\dfrac{1}{a_i} -\prod_{i=1}^{n}\dfrac{1}{b_i}=\sum_{i=1}^{n}-\dfrac{a_i-b_i}{\xi_i^2}\cdot\prod_{1\leqslant k\leqslant n, k\neq i}\dfrac{1}{\xi_k}
+$$
+\par
+其中，$$
+\xi_i=b_i+\theta(a_i-b_i), \theta \in(0,1), \xi_i\geqslant M, |a_i-b_i|\leqslant \varepsilon
+$$
+\par
+于是：
+$$
+\begin{aligned}
+\left|\prod_{i=1}^{n}\dfrac{1}{a_i} -\prod_{i=1}^{n}\dfrac{1}{b_i}\right|
+&=\sum_{i=1}^{n}\dfrac{|a_i-b_i|}{\xi_i^2}\cdot\prod_{1\leqslant k\leqslant n, k\neq i}\dfrac{1}{|\xi_k|}\\
+&\leqslant \sum_{i=1}^{n} \dfrac{\varepsilon}{M^{n+1}}\\
+&=\dfrac{n\varepsilon}{M^{n+1}}
+\end{aligned}
+$$
+
+
+
+\end{solution}
+\end{document}
