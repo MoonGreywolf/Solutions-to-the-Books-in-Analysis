@@ -1,0 +1,213 @@
+\documentclass[12pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, color, framed, graphicx, hyperref, mathrsfs}
+
+\title{\textbf{General Topology Chapter 1}}
+\author{张浩然}
+\date{\today}
+\linespread{1.5}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\par}
+
+\begin{document}
+
+\maketitle
+
+
+
+\begin{problem}
+Exercise 1:
+\par
+设 $f : [0,1] \rightarrow \mathbb{R}$是连续函数，且$f(0) = f(1) = 0$.
+\par
+ 考虑由函数$f$在$[0,1]$之间的图像、$x$轴上从$x=0$到$x=1$的线段组成的简单闭曲线$C$ .
+ \par
+ 证明: 总可以在这条平面简单闭曲线$C$上找到四个点，使得它们为一个正方形的顶点.
+\par
+ 提示: 考虑 $g(x) = f(x) -f(x +f(x)), h(x)=x+f(x)$. 
+\end{problem}
+
+
+\begin{solution}
+\par
+由于$C$是简单闭曲线，$f(x)$在$(0,1)$上没有零点且连续，则恒正或者恒负.
+\par
+不妨设$f(x)$恒正，否则考虑$-f(x)$即可.
+根据$f(x)$在$[0,1]$连续，存在$x_0\in (0,1)$,使得$f(x_0)>0$为最大值.
+\par
+考虑$h(x)=x+f(x)$,在$[0,1]$上连续,则有$g(0)=0+f(0)=0, g(1)=1+f(1)=1$,根据介值定理，
+存在$x_1 \in (0,1)$,使得$g(x_1)=x_0$, 即$x_1+f(x_1)=x_0$.
+\par
+此时，我们延拓$f(x)$,
+$$
+\begin{aligned}
+  f(x)=
+\begin{cases}
+f(x),&x \in [0,1];\\
+0,   &x\in (1 +\infty)
+\end{cases}
+\end{aligned}
+$$
+\par
+延拓后，考虑$g(x)=f(x)-f(x+f(x))$,在$[0,1]$上连续.
+$$
+\begin{aligned}
+&g(x_0)=f(x_0)-f(x_0+f(x_0))\geqslant 0\\
+&g(x_1)=f(x_1)-f(x_1+f(x_1))=f(x_1)-f(x_0)\leqslant 0
+\end{aligned}
+$$
+\par
+根据介值定理，存在$x_2$可能介于$x_0$和$x_1$之间, 可能等于$x_0$或$x_1$,
+使得$$
+g(x_2)=0, f(x_2)=f(x_2+f(x_2))
+$$
+\par
+简单闭曲线$C$上$(x_2, 0),(x_2+f(x_2),0),(x_2, f(x_2)), \left(x_2+f(x_2), f(x_2+f(x_2))\right)$
+为一个正方形的顶点.
+\end{solution}
+
+\begin{problem}
+Exercise 2：
+\par
+一个足球可以只用六边形组成吗？
+\end{problem}
+
+
+\begin{solution}
+\par
+答案是否定的.
+\par
+假设成立，有$n$个六边形，我们考虑Euler公式：
+\par
+几何体每个顶点由三个六边形贡献：$V=\dfrac{6n}{3}=2n$
+\par
+几何体每条棱由两个六边形贡献：$E=\dfrac{6n}{2}=3n$
+\par
+几何体每个面只由一个六边形贡献：$F=\dfrac{n}{1}=n$
+\par
+则$$
+V-E+F=2n-3n+n=0\neq 2
+$$
+\par
+显然不能组成足球.
+
+
+\end{solution}
+
+
+\begin{problem}
+Exercise 3:
+\par
+Weierstrasss在1870年对Dirichlet原理的反例
+\par
+对任意函数$u\in \mathcal{A}=\{ C^1[-1,1] : u(-1)=0, u(1)=1\}$,
+定义:
+$$
+F(u)=\int_{-1}^{1}|xu'(x)|^2\mathrm{d}x
+$$
+\par
+(1) 证明: 对任意$n\in \mathbb{N}$, 函数
+$$
+u_n(x) := \left(\sin \dfrac{n\pi x}{2}\right)^2 \chi _{\left[0,\frac{1}{n}\right]}(x) +
+\chi_{\left(\frac{1}{n},1\right]}(x)
+$$
+\par
+是 $\mathcal{A}$ 的元素, 其中$\chi_{A}(x)$是集合$A$的示性函数.
+\par
+(2) 证明: $$
+\lim_{n \to \infty}
+F(u_n) = 0.
+$$
+\par
+(3) 证明: 不存在函数$u\in \mathcal{A}$可以取得$F$的最小值.
+\end{problem}
+
+\begin{solution}
+\par
+(1)证明：
+$$
+\begin{aligned}
+u_n(x)=
+\begin{cases}
+  \left(\sin \dfrac{n\pi x}{2}\right)^2, &x\in \left[0,\frac{1}{n}\right]\\
+  1,         &x \in  \left(\frac{1}{n},1\right]\\
+  0,          &x \in [-1,0)
+\end{cases}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+u_n'(x)=
+\begin{cases}
+  n\pi \sin \dfrac{n\pi x}{2}\cos \dfrac{n\pi x}{2}, &x\in \left(0,\frac{1}{n}\right)\\
+  0,         &x \in  \left(\frac{1}{n},1\right)\\
+  0,          &x \in (-1,0)
+\end{cases}
+\end{aligned}
+$$
+\par
+容易验证：
+$$
+u_n'(0)=0=\lim_{x\to 0}u_n'(x), 
+u_n'\left(\frac{1}{n}\right)=0=\lim_{x\to \frac{1}{n}}u_n'(x), 
+$$
+\par
+于是$u_n\in C^1[-1,1]$且$u(-1)=0, u(1)=1$.
+\par
+则$u_n(x)\in \mathcal{A}, \forall n \in \mathbb{N}$.
+
+
+
+\par
+(2)证明：
+\par
+$$
+\begin{aligned}
+F(u_n)&=\int_{-1}^{1}|xu_n'(x)|^2\mathrm{d}x\\
+&=\int_{0}^{\frac{1}{n}}\left(n\pi x\sin \frac{n\pi x}{2}\cos \frac{n\pi x}{2}\right)^2\mathrm{d}x\\
+&\leqslant \frac{1}{4}\int_{0}^{\frac{1}{n}}n^2\pi^2x^2\mathrm{d}x\\
+&=\frac{\pi^2}{12n}
+\end{aligned}
+$$
+\par
+于是，$$
+0\leqslant F(u_n)\leqslant \frac{\pi^2}{12n}\to 0, n \to \infty
+$$
+$$
+\lim_{n \to \infty}F(u_n)=0.
+$$
+
+
+
+
+
+
+
+\par
+(3)证明：
+\par
+我们用反证法,假设存在函数$u$满足条件$F(u)=0$,
+则
+$$
+\int_{-1}^{1}|xu'(x)|^2\mathrm{d}x=0
+$$
+\par
+根据$u(x)\in C^1[-1,1]$, 则$|xu'(x)|^2\in C^0[-1,1]$,
+则
+$$
+|xu'(x)|^2=0, \forall x \in [-1,1]
+$$
+\par
+则$u'(x)=0, \forall x \in [-1,1]$,
+$u(x)$为常数，但与$u(-1)=0, u(1)=1$矛盾！
+\par
+于是不存在函数$u$取得$F$的下确界.
+
+
+\end{solution}
+
+
+\end{document}
