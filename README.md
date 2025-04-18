@@ -30,7 +30,7 @@
 
 ## 4. 泛函分析
 - **Brezis** 相关著作
-- **Stein** 《Functional Analysis》
+- **Stein 《Functional Analysis》**
 
 ---
 
@@ -45,7 +45,7 @@
 ---
 
 ## 7. 一般拓扑学
-- **王作勤** 相关著作
+- **王作勤 《拓扑学讲义》**
 
 ---
 
