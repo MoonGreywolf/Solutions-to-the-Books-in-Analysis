@@ -1,0 +1,97 @@
+\documentclass[12pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, color, framed, graphicx, hyperref, mathrsfs}
+
+\title{\textbf{Fourier Analysis Appendix 3}}
+\author{张浩然}
+\date{\today}
+\linespread{1.5}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\par}
+
+\begin{document}
+
+\maketitle
+
+
+
+\begin{problem}
+ 2025年丘成桐领军计划四月考试:
+ \par
+ 已知:
+ $$
+  f(x)=\sum_{n=0}^{\infty}2^{-n}\cos (nx)
+ $$
+ \par
+ 求:
+ $$
+ \int_{0}^{2\pi}|f(x)|^2\mathrm{d}x
+ $$
+\end{problem}
+
+
+
+\begin{solution}
+  \par
+  显然此题是要考虑Fourier分析:
+  \par
+  由于
+  $2^{-n}|\cos(nx)|\leqslant 2^{-n}$,而且
+  $$
+   \sum_{n=1}^{\infty}2^{-n}<\infty
+  $$
+  \par
+  根据Weierstrass判别法,其一致收敛且每项连续,则$f$在$[0,2\pi]$上连续.
+  \par
+  又计算有:
+  $$
+  f(x)\sim 1+\sum_{n=1}^{\infty}\dfrac{1}{2^{n+1}}\mathrm{e}^{inx}
+  +\sum_{n=1}^{\infty}\dfrac{1}{2^{n+1}}\mathrm{e}^{-inx}
+  $$
+  \par
+  根据Paseval恒等式:
+  $$
+  \dfrac{1}{2\pi}\int_{0}^{2\pi}|f(x)|^2\mathrm{d}x=1+2\sum_{n=1}^{\infty}\dfrac{1}{2^{2n+2}}
+  $$
+  \par
+  则:
+  $$
+   \int_{0}^{2\pi}|f(x)|^2\mathrm{d}x=\dfrac{7\pi}{3}
+  $$
+\end{solution}
+
+\begin{problem}
+
+$$
+\int_{0}^{2\pi}(x^2-a\cos x-b\sin x)^2\mathrm{d}x
+$$
+\par
+取得最小值时,$a$的值为?
+\end{problem}
+\begin{solution}
+  \par
+  我们考虑$[0,2\pi]$上的函数空间内积:
+  $$
+  \langle f(x),g(x)\rangle=\dfrac{1}{\pi}\int_{0}^{2\pi}f(x)g(x)\mathrm{d}x
+  $$
+  \par
+  范数:
+  $$
+  \|f\|=\left(\dfrac{1}{\pi}|f(x)|^2\mathrm{d}x\right)^{\frac{1}{2}}
+  $$
+  \par
+  显然，我们在此内积空间上有最佳逼近引理:
+  $$
+  \|f(x)-\langle f,\cos x \rangle \cos x-\langle f,\sin x \rangle \sin x\|
+  \leqslant \|f(x)-a\cos x-b \sin x \|
+  $$
+\par
+取等时，我们有:
+$$
+a=\langle f,\cos x \rangle =\dfrac{1}{\pi}\int_{0}^{2\pi}x^2\cos x\mathrm{d}x=4
+$$
+
+\end{solution}
+\end{document}
