@@ -1,0 +1,107 @@
+\documentclass[12pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, color, framed, graphicx, hyperref, mathrsfs}
+
+\title{\textbf{Fourier Analysis Appendix 4}}
+\author{张浩然}
+\date{\today}
+\linespread{1.5}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\par}
+
+\begin{document}
+
+\maketitle
+
+
+
+\begin{problem}
+  2025年中科院数学所推免笔试
+ \par
+(1)证明: 三角级数$\sum_{k=1}^{\infty}\dfrac{\sin(kx)}{\sqrt{k}}$在$x\in \mathbb{R}$
+上均收敛, 但它不可能是任何平方Riemann可积函数$f\in \mathcal{R}_2[-\pi,\pi]$的Fourier级数;
+\par
+(2)讨论三角级数$\sum_{k=1}^{\infty}\dfrac{\cos(kx)}{k}$在$x\in \mathbb{R}$上的收敛性
+和一致收敛性.
+\end{problem}
+
+
+
+\begin{solution}
+  \par
+  (1)当$x\ne 2n\pi,n\in \mathbb{Z}$时，根据复指数方法：
+  $$
+  \left|\sum_{k=1}^{N}\sin(kx)\right|
+  =\dfrac{\left|\cos(\frac{1}{2}x)
+  -\cos(N+\frac{1}{2})\right|}{2|\sin \frac{1}{2}x|}\leqslant \dfrac{1}{|\sin \frac{x}{2}|}
+  $$
+  \par
+  其一致有界，且$\dfrac{1}{\sqrt{k}}$单调递减收敛于$0$.
+  \par
+  根据Dirichlet判别法，其收敛.
+  \par
+  又$x=2n\pi, n \in \mathbb{Z}$时，显然收敛，则此级数$x\in \mathbb{R}$均收敛.
+  \par
+  反证法，假设其为某平方Riemann可积函数$f(x)$的Fourier级数.
+  则:
+  $$
+f(x)\sim \sum_{k=1}^{\infty}\dfrac{1}{2i\sqrt{k}}\mathrm{e}^{ikx}+\sum_{k=1}^{\infty}\dfrac{-1}{2i\sqrt{k}}\mathrm{e}^{-ikx}
+  $$
+  \par
+  根据Parseval恒等式:
+  $$
+  \dfrac{1}{2\pi}\int_{-\pi}^{\pi}|f(x)|^2\mathrm{d}x
+  =\sum_{k=1}^{\infty}\dfrac{1}{2k}
+  $$
+  \par
+  根据右侧级数发散，而左侧积分有限知道矛盾!
+  \par
+  不存在任何平方Riemann可积函数满足条件.
+  \par
+  \quad
+  \par
+  (2)此级数的收敛性方法同上,但要注意$x=2n\pi,n\in \mathbb{Z}$
+  时，$\sum_{k=1}^{\infty}\dfrac{1}{\sqrt{k}}$级数发散，$x\ne 2n\pi, n\in \mathbb{Z}$时，级数收敛.
+  \par
+  下说明$x \ne 2n\pi,n\in \mathbb{Z}$时，条件收敛.
+  \par
+  用反证法，假设其绝对收敛, 那么:
+  $$
+  \dfrac{|\cos(kx)|}{\sqrt{k}}\geqslant \dfrac{|\cos(kx)|^2}{\sqrt{k}}=\dfrac{\cos(2kx)}{2\sqrt{k}}+\dfrac{1}{2\sqrt{k}}
+  $$
+  \par
+  (1)当$x\ne n\pi, n\in \mathbb{Z}$因为$\sum_{k=1}^{\infty}\dfrac{\cos(2kx)}{2\sqrt{k}}$收敛，但$\sum_{k=1}^{\infty}\dfrac{1}{2\sqrt{k}}=+\infty$
+  矛盾!
+  \par
+  (2)当$x=n\pi,n\in\mathbb{Z}$, $2\sum_{k=1}^{\infty}\dfrac{1}{2\sqrt{k}}=+\infty$,
+  矛盾!
+  \par
+  则此级数条件收敛.
+  \par
+  下证其不是一致收敛的.
+  存在$\varepsilon_0=\dfrac{\sqrt{2}}{4}$,存在$n,2n,x_0=2n\pi+\dfrac{\pi}{2}-\dfrac{\pi}{4n}$使得
+  $$
+  \begin{aligned}
+&\left|\dfrac{\cos(n+1)x_0}{\sqrt{n+1}}+\cdots+\dfrac{\cos(2n)x_0}{\sqrt{2n}}\right|\\
+=&\dfrac{\cos\frac{(n-1)\pi}{4n}}{\sqrt{n+1}}+\cdots+\dfrac{\cos 0}{\sqrt{2n}}\\
+\geqslant& \cos\frac{\pi}{4}\left(\dfrac{1}{\sqrt{n+1}}+\cdots+\dfrac{1}{\sqrt{2n}}\right)\\
+\geqslant& \cos\frac{\pi}{4}\left(\dfrac{1}{n+1}+\cdots+\dfrac{1}{2n}\right)\\
+\geqslant &\cos \dfrac{\pi}{4}\cdot \dfrac{n}{2n}\\
+=&\dfrac{\sqrt{2}}{4}=\varepsilon_0
+  \end{aligned}
+  $$
+  \par
+  则其非一致收敛.
+  \par
+  但取不包含$2n\pi,n\in\mathbb{Z}$的任何闭区间，其上一致收敛的，这可以根据
+  一致收敛的Dirichlet判别法得到, 因为$|\sum_{k=1}^{N}\cos kx|\leqslant C$,$C>0$且与$x,N$无关,
+  且$\dfrac{1}{\sqrt{k}}$关于$x$一致单调收敛到$0$.
+  \par
+  综上所述，$x=2n\pi,n\in \mathbb{Z}$时，此三角级数发散.
+  \par
+  $x\ne 2n\pi, n\in \mathbb{Z}$时, 此三角级数条件收敛,且不一致收敛，但是内闭一致收敛.
+\end{solution}
+
+\end{document}
