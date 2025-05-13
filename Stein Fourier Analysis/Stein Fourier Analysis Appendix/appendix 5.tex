@@ -1,0 +1,163 @@
+\documentclass[12pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, color, framed, graphicx, hyperref, mathrsfs}
+
+\title{\textbf{Fourier Analysis Appendix 5}}
+\author{张浩然}
+\date{\today}
+\linespread{1.5}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\par}
+
+\begin{document}
+
+\maketitle
+
+
+
+\begin{problem}
+  2020年丘成桐大学生数学竞赛分析与方程 Q2
+  \par
+  在去年的丘成桐大学生数学竞赛中, Tintin, Haddock,
+ Dupont和Dupond挺进决赛分析口试.
+ \par
+ 丘先生让他们计算一个周期为$2\pi$的函数(定义在$\mathbb{R}$上)的Foruier系数:
+ $$
+ \begin{aligned}
+ &F: (0,2\pi)\rightarrow \mathbb{R}\\
+ &x\mapsto F(x) =\arctan \left(\dfrac{x}{2\pi}\mathrm{e}^{\sin x}
+ +x^{2019}(x-2\pi)+2019\sin x \right) 
+ \end{aligned}
+ $$
+ \par
+ 以下是他们各自的解, $k\neq 0$:
+ \par
+ Tintin:
+  $\widehat{F}(k)=\dfrac{\cos k\pi}{|k|^{\frac{1}{2}}}+\dfrac{a}{|k|}+\dfrac{b}{|k|^3}$
+ \par
+Haddock: $\widehat{F}(k)=\dfrac{c}{k^2}+\dfrac{d}{k^4}+\dfrac{e}{k^6}$
+\par
+Dupont: $\widehat{F}(k)=\dfrac{1}{k}+\dfrac{1}{k^2}+\dfrac{f}{k^3}+\dfrac{g}{k^5}$
+ \par
+ Dupond: $\widehat{F}(k)=\dfrac{2019\sqrt{-1}}{k}+\dfrac{h_k}{k}$
+ \par
+ 其中$a,b,c,d,e, f, g,h_k(k\in \mathbb{Z})$ 是常数
+ ,并且:
+ $$
+ \sum_{k \in \mathbb{Z}}|h_k|^2<\infty
+ $$
+ \par
+ 试问谁的解是正确的?
+\end{problem}
+
+
+
+\begin{solution}
+  \par
+  我们先研究函数性态:\par
+  显然$F\in C^{\infty}(0,2\pi)$.
+  $$
+   \lim_{x \to 0^+}F(x)=0, \quad \lim_{x \to 2\pi^-}F(x)=\dfrac{\pi}{4}
+  $$
+  \par
+  $F$有界，则$F\in L^2$.
+  \par
+  对于Tintin的答案, 若正确,我们利用Parseval恒等式有:
+  $$
+   \widehat{F}(k)\in l^2
+  $$
+  \par
+  但是$\left|\widehat{F}(k)\right| ^2\sim \dfrac{1}{|k|}$,
+   那么$\widehat{F}(k)\notin l^2$,此答案错误.
+\par
+\quad
+\par
+\quad
+\par
+对于Haddock的答案，若正确，我们有:
+$$
+\sum_{k\in \mathbb{Z}}\left|\widehat{F}(k)\right|
+\leqslant \sum_{k\in \mathbb{Z}}\dfrac{|c|}{k^2}
++\sum_{k\in \mathbb{Z}}\dfrac{|d|}{k^4}+
+\sum_{k\in \mathbb{Z}}\dfrac{|e|}{k^6}
+<+\infty
+$$
+\par
+那么$\sum_{k\in\mathbb{Z} }\widehat{F}(k)\mathrm{e}^{\sqrt{-1}kx}$一致收敛, 
+收敛到一个连续函数$G(x)$,其 Fourier系数与$F(x)$相同.
+\par
+\quad
+\par
+引理: 
+\par
+若函数$F,G$的Fourier系数相同, 那么在连续点$x=x_0$处,$F(x_0)=G(x_0)$.
+\par
+\quad
+\par
+存在$\varepsilon_0=\dfrac{\pi}{16}$,存在$\delta>0$,
+使得当$x_1, x_2\in (2\pi-\delta,2\pi+\delta)$时,
+$$
+|G(x_1)-G(x_2)|<\dfrac{\pi}{16}
+$$
+\par
+接下来取两点$x_1\in(2\pi-\delta,2\pi),x_2\in (2\pi,2\pi+\delta)$,使之充分靠近$2\pi$,
+则有:
+$$
+|F(x_1)-F(x_2)|\geqslant \dfrac{\pi}{16}
+$$
+\par
+又除了$x=2k\pi, k\in \mathbb{Z}$外处处连续,于是$F(x_1)=G(x_1),F(x_2)=G(x_2)$,
+那么此答案错误.
+\par
+\quad
+\par
+\quad
+\par
+对于Dupont的答案,其不满足实值函数的Fourier系数的性质:
+$$
+\overline{\widehat{F}(k)}=\widehat{F}(-k)
+$$
+\par
+故此答案错误.
+\par
+\quad
+\par
+\quad
+\par
+对于Dupond的答案，若正确，则:
+$$
+\begin{aligned}
+\dfrac{2019\sqrt{-1}}{k}+\dfrac{h_k}{k}=&\widehat{F}(k)\\
+=&\dfrac{1}{2\pi}\int_{0}^{2\pi}F(x)\mathrm{e}^{-\sqrt{-1}kx}\mathrm{d}x\\
+=&\dfrac{\sqrt{-1}}{8k}+\dfrac{\widehat{F'}(k)}{k}\\
+\end{aligned}
+$$
+\par
+其中由$F'(x)\in L^2$,则$h_k,\widehat{F'}(k)\in l^2$,但是$2019\sqrt{-1}-\dfrac{1}{8}\sqrt{-1}\notin l^2$
+\par
+故其答案错误.
+
+\par
+\quad
+\par
+综上所述，没一个正确，如此成绩，令人汗颜! 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{solution}
+  
+
+\end{document}
