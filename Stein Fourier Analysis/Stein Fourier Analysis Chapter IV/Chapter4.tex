@@ -1,0 +1,672 @@
+\documentclass[12pt, a4paper, oneside]{ctexart}
+\usepackage{amsmath, amsthm, amssymb, bm, color, framed, graphicx, hyperref, mathrsfs}
+\everymath{\displaystyle}
+\title{\textbf{Fourier Analysis Chapter 4}}
+\author{张浩然}
+\date{\today}
+\linespread{1.5}
+\definecolor{shadecolor}{RGB}{241, 241, 255}
+\newcounter{problemname}
+\newenvironment{problem}{\begin{shaded}\stepcounter{problemname}\par\noindent\textbf{题目\arabic{problemname}. }}{\end{shaded}\par}
+\newenvironment{solution}{\par\noindent\textbf{解答. }}{\par}
+\newenvironment{note}{\par\noindent\textbf{题目\arabic{problemname}的注记. }}{\par}
+
+\begin{document}
+
+\maketitle
+
+
+\begin{problem}
+Exercise 1
+\par
+设$\gamma: [a,b]\rightarrow \mathbb{R}^2$是闭曲线
+$\Gamma$的一个参数化.
+\par
+(1)证明:$\gamma$是弧长参数化当且仅当曲线从$\gamma(a)$到$\gamma(s)$
+的长度恰好是$s-a$,即
+$$
+\int_{a}^{s}|\gamma'|\mathrm{d}t=s-a
+$$
+\par
+(2)证明:任何正则参数曲线都可以弧长参数化.
+\end{problem}
+
+\begin{solution}
+\par
+(1)必要性:
+\par
+若$\gamma$是弧长参数化, 则$|\gamma'|=1$,
+那么:
+$$
+\int_{a}^{s}|\gamma'|\mathrm{d}t=\int_{a}^{s}1\mathrm{d}t=s-a
+$$
+\par
+充分性:
+\par
+由于$\gamma\in C^1$,则$|\gamma'|-1 \in C$.
+\par
+那么由于:
+$$
+\int_{a}^{s}(|\gamma'|-1)\mathrm{d}t=0
+$$
+\par
+那么, $|\gamma'|=1$,$\gamma$是弧长参数化.
+\par
+(2)我们考虑:$\eta:[a,b]\rightarrow \mathbb{R}^2$是$\Gamma$任意一个参数化,
+记
+$$
+h(s)=\int_{a}^{s}|\eta'(t)|\mathrm{d}t
+$$
+\par
+由正则曲线条件,$\eta'(t)\neq 0$,则$h(s)$单调递增, $h'(s)=|\eta'(s)|$
+,存在反函数$h^{-1}$.
+\par
+令$\gamma(s)=\eta \circ h^{-1}(s)$, 求导有:
+$$
+\gamma'(s)= \eta'(u)
+\cdot \dfrac{\mathrm{d}h^{-1}(s)}{\mathrm{d}s}=\dfrac{\eta'(u)}{|\eta'(u)|}
+$$
+\par
+那么$$
+|\gamma'|=1
+$$
+\par
+任意正则参数曲线一定可以弧长参数化.
+\end{solution}
+
+\begin{problem}
+Exercise 2
+\par
+设$\gamma:[a,b]\rightarrow \mathbb{R}^2$是闭曲线$\Gamma$的参数化，
+有：
+$$
+\gamma(t)=(x(t),y(t))
+$$
+\par
+(1)证明:$$
+\dfrac{1}{2}\int_{a}^{b}[x(s)y'(s)-x'(s)y(s)]\mathrm{d}s
+=\int_{a}^{b}x(s)y'(s)\mathrm{d}s
+=-\int_{a}^{b}x'(s)y(s)\mathrm{d}s
+$$
+\par
+(2)定义反向参数化为:$\gamma^-:[a,b]\to \mathbb{R}^2$,有：
+$$
+\gamma^-(t)=\gamma(b+a-t)
+$$
+\par
+证明:
+$$
+\int_{\gamma}(x\mathrm{d}y-y\mathrm{d}x)
+=-\int_{\gamma^-}(x\mathrm{d}y-y\mathrm{d}x)
+$$
+\end{problem}
+
+\begin{solution}
+\par
+(1)证明:
+\par
+考虑:
+$$
+(x(s)y(s))'=x'(s)y(s)+x(s)y'(s)
+$$
+\par
+由于闭曲线性质:$x(a)=x(b),y(a)=y(b)$,
+$$
+\int_{a}^{b}(x(s)y(s))'\mathrm{d}s=x(s)y(s)\bigg|^b_a=0
+$$
+\par
+则:
+$$
+\int_{a}^{b}x(s)y'(s)\mathrm{d}s=-\int_{a}^{b}y(s)x'(s)\mathrm{d}s
+$$
+\par
+各取一半,有:
+$$
+\dfrac{1}{2}\int_{a}^{b}(x(s)y'(s)-y(s)x'(s))\mathrm{d}s=\int_{a}^{b}x(s)y'(s)\mathrm{d}s=-\int_{a}^{b}y(s)x'(s)\mathrm{d}s
+$$
+\par
+(2)证明:
+\par
+令$s=a+b-t$
+$$
+\begin{aligned}
+ &\int_{\gamma}(x\mathrm{d}y-y\mathrm{d}x)\\
+=&\int_{a}^{b}(x(s)y'(s)-y(s)x'(s))\mathrm{d}s\\
+=&\int_{b}^{a}\left[x(b+a-t)y'(b+a-t)-y(b+a-t)x'(b+a-t)\right]\cdot(-1)\mathrm{d}t\\
+=&-\int_{\gamma^-}(x\mathrm{d}y-y\mathrm{d}x)
+\end{aligned}
+$$
+\end{solution}
+
+\begin{problem}
+Exercise 4
+\par
+等周不等式对于非简单闭曲线也成立.
+\par
+证明: 更强版本的等周不等式等价于Wirtinger不等式
+\par
+Wirtinger不等式即$f\in C^1$且周期$2\pi$,满足$\int_{0}^{2\pi}f(t)\mathrm{d}t=0$,
+则:
+$$
+\int_{0}^{2\pi}|f(t)|^2\mathrm{d}t\leqslant \int_{0}^{2\pi}|f'(t)|^2\mathrm{d}t
+$$
+\par
+等号成立当且仅当$f(t)=A\sin t+ B\cos t$.
+\end{problem}
+
+
+\begin{solution}
+\par
+从Wirtinger不等式推导等周不等式:
+\par
+设曲线$\Gamma$长度为$2\pi$,
+弧长参数化$\gamma(s)=(x(s),y(s))$, $[x'(s)]^2+[y(s)']^2=1, s\in[0,2\pi]$.
+\par
+只需要证明:$\mathcal{A}\leqslant \pi$
+\par
+注意到恒等式:
+$$
+2\pi-2\mathcal{A}=\int_{0}^{2\pi}[x'(s)+y(s)]^2\mathrm{d}s+\int_{0}^{2\pi}(y'(s)^2-y(s)^2)\mathrm{d}s
+\geqslant 0
+$$
+\par
+其中总可以平移坐标使得$y(s)=y(s)-\dfrac{1}{2\pi}\int_{0}^{2\pi}y(s)\mathrm{d}s$,
+利用Wirtinger不等式放缩第二项即可.
+\par
+于是等周不等式$$
+\mathcal{A}\leqslant \pi
+$$
+\par
+成立.
+\par
+从等周不等式推导Wirtinger不等式:
+\par
+设$f(x)$满足等周不等式条件.$f\in C^1$,存在周期$2\pi$的连续可微函数$g(x)=\int_{0}^{x}[-f(t)]\mathrm{d}t$,使得$g'(x)=-f(x)$,
+那么$\gamma(x)=(g(x),f(x))$确定了一条闭曲线$\Gamma$，长度为$l$.
+\par
+$$
+\begin{aligned}
+&\int_{0}^{2\pi}(|f'(x)|^2-|f(x)|^2)\mathrm{d}x\\
+=&\int_{0}^{2\pi}[g'(x)+f(x)]^2\mathrm{d}x+\int_{0}^{2\pi}(f'(x)^2-f(x)^2)\mathrm{d}x\\
+=&\int_{0}^{2\pi}(g'(x)^2+f'(x)^2)\mathrm{d}x-2\mathcal{A}\\
+\geqslant &\dfrac{1}{2\pi}\left(\int_{0}^{2\pi}\sqrt{f'(x)^2+g'(x)^2}\mathrm{d}x\right)^2-2\mathcal{A}\\
+=&\dfrac{l^2}{2\pi}-2\mathcal{A}\\
+\geqslant& 0
+\end{aligned}
+$$
+\par
+其中倒数第二个大于等于号用到Cauchy不等式:
+$$
+\left(\int \sqrt{f'(x)^2+g'(x)^2}\right)^2\leqslant 2\pi \cdot \int(f'(x)^2+g'(x)^2)
+$$最后一个大于等于号用到等周不等式:
+$$
+\mathcal{A}\leqslant \dfrac{l^2}{4\pi}
+$$
+\par
+综上所述，原命题成立.
+\end{solution}
+
+
+\begin{problem}
+    Exercise 5
+    \par
+证明:序列$\{\gamma_n\}$在$[0,1]$中不是等分布的,其中$\gamma_n$是
+$$
+\left(\dfrac{1+\sqrt{5}}{2}\right)^n
+$$
+\par
+的小数部分.
+\end{problem}
+
+
+\begin{solution}
+考虑$$
+U_{r+1}=U_r+U_{r-1}
+$$
+\par
+的特征方程:
+$$
+\lambda^2-\lambda-1=0
+$$
+\par
+$$
+\lambda_1=\dfrac{1+\sqrt{5}}{2}, \lambda_2=\dfrac{1-\sqrt{5}}{2}
+$$
+\par
+带入初值知道:
+$$
+U_n=\left(\dfrac{1+\sqrt{5}}{2}\right)^n+\left(\dfrac{1-\sqrt{5}}{2}\right)^n
+$$
+\par
+根据递推方程和归纳法知道$U_n $是正整数.
+\par
+又$\left|\dfrac{1-\sqrt{5}}{2}\right|<1$
+$$
+\lim_{n \to \infty}\left(\dfrac{1-\sqrt{5}}{2}\right)^n=0
+$$
+\par
+那么考虑$$
+\left(\dfrac{1+\sqrt{5}}{2}\right)^n=U_n-\left(\dfrac{1-\sqrt{5}}{2}\right)^n
+$$
+\par
+当$n=2k, k \in \mathbb{Z}$时,
+$$
+\lim_{n \to \infty}\gamma_n=\lim_{n \to \infty}\left\{\left(\dfrac{1+\sqrt{5}}{2}\right)^n\right\}=1
+$$
+\par
+当$n=2k+1, k \in \mathbb{Z}$时,
+$$
+\lim_{n \to \infty}\gamma_n=\lim_{n \to \infty}\left\{\left(\dfrac{1+\sqrt{5}}{2}\right)^n\right\}=0
+$$
+\par
+这是因为$\dfrac{1-\sqrt{5}}{2}<0$,考虑正负.
+
+\par
+考虑区间$\left(\dfrac{1}{4},\dfrac{3}{4}\right)$,
+当$N$充分大,
+$\gamma_n=\left\{\left(\dfrac{1+\sqrt{5}}{2}\right)^n\right\}$分布集中在$[0,1]$两个端点处,
+$$
+\lim_{N\to \infty}\dfrac{1}{N}\cdot\sum_{i=1}^{N}\chi_{\left(\frac{1}{4},\frac{3}{4}\right)}\left(\gamma_n\right)=0
+$$
+\par
+则其在$[0,1]$中不是等分布.
+\end{solution}
+
+\begin{problem}
+Exercise 7
+\par
+证明Weyl准则的第二部分:
+\par
+如果一个序列$\xi_1,\xi_2,\cdots, \xi_n,\cdots \in [0,1)$是等分布的,
+那么对于所有$k\in \mathbb{Z}\setminus \{0\}$有:
+$$
+\dfrac{1}{N}\sum_{n=1}^{N}\mathrm{e}^{2\pi ik \xi_n} \to 0, \quad N \to \infty
+$$
+
+\end{problem}
+
+
+\begin{solution}
+\par
+证明: 已知$\{\xi_n\}$是等分布序列, 那么对于$(a,b)\subset [0,1)$有:
+$$
+\lim_{N \to \infty}\dfrac{1}{N}\sum_{n=1}^{N}\chi_{(a,b)}(\xi_n)=b-a
+$$
+\par
+对于阶梯函数$f$, 其是特征函数的线性组合, 那么有:
+$$
+\lim_{N \to \infty}\dfrac{1}{N}\sum_{n=1}^{N}f(\xi_n)=\int_{0}^{1}f(x)\mathrm{d}x
+$$
+\par
+对于连续函数的情况, 我们断言: 任何闭区间上的连续函数可以被阶梯函数一致逼近.
+\par
+则对于$[0,1]$上连续函数$f(x)$ ,对任意$\varepsilon>0$,存在阶梯函数$h$使得:
+$$
+\sup_{x\in[0,1]}|f(x)-h(x)|<\dfrac{\varepsilon}{3}
+$$
+\par
+那么,当$N$充分大时:
+$$
+\begin{aligned}
+&\left|\dfrac{1}{N}\sum_{n=1}^{N}f(\xi_n)-\int_{0}^{1}f(x)\mathrm{d}x\right|\\
+=&\left|\dfrac{1}{N}\sum_{n=1}^{N}f(\xi_n)
+-\dfrac{1}{N}\sum_{n=1}^{N}h(\xi_n)
++\dfrac{1}{N}\sum_{n=1}^{N}h(\xi_n)-\int_{0}^{1}h(x)\mathrm{d}x
++\int_{0}^{1}h(x)\mathrm{d}x-\int_{0}^{1}f(x)\mathrm{d}x\right|\\
+\leqslant &\dfrac{1}{N}\sum_{n=1}^{N}|f(\xi_n)-h(\xi_n)|
++\left|\dfrac{1}{N}\sum_{n=1}^{N}h(\xi_n)-\int_{0}^{1}h(x)\mathrm{d}x\right|
++\int_{0}^{1}|h(x)-f(x)|\mathrm{d}x\\
+<&\dfrac{\varepsilon}{3}+\dfrac{\varepsilon}{3}+\dfrac{\varepsilon}{3}\\
+=&\varepsilon
+\end{aligned}
+$$
+\par
+其中用到$$
+\lim_{N \to \infty}\dfrac{1}{N}\sum_{n=1}^{N}h(\xi_n)=\int_{0}^{1}h(x)\mathrm{d}x
+$$
+\par
+当$N$充分大时, $$
+\left|\dfrac{1}{N}\sum_{n=1}^{N}h(\xi_n)-\int_{0}^{1}h(x)\mathrm{d}x\right|<\dfrac{\varepsilon}{3}
+$$
+\par
+\quad
+\par
+于是连续函数$f$满足:
+$$
+\lim_{N \to \infty}\dfrac{1}{N}\sum_{n=1}^{N}f(\xi_n)=\int_{0}^{1}f(x)\mathrm{d}x
+$$
+\par
+取$f(x)=\mathrm{e}^{2\pi k i x}, k\in \mathbb{Z}_{\neq 0}$计算即可.
+\end{solution}
+
+\par
+\quad
+\par
+
+\begin{note}
+\par
+解答两个问题:
+\par
+\quad
+\par
+\textbf{为什么有界闭区间上的连续函数可以被阶梯函数一致逼近?}
+\par
+考虑$f(x)$在$[a,b]$上连续，则一致连续.
+\par
+对任意$\varepsilon>0$,存在$\delta>0$,使得$|x-y|<\delta$时，
+$$
+|f(x)-f(y)|<\varepsilon
+$$
+\par
+将区间划分为$a=x_0<x_1<\cdots<x_{n'}=b$,存在$N$,$n'>N$时，$\dfrac{b-a}{n'}<\delta$.
+\par
+在$[x_i,x_{i+1}], 0 \leqslant i \leqslant n$上取函数$h_{n'}(x)=f(x_{i})$,则在此区间上
+$$
+|f(x)-h_{n'}(x)|<\varepsilon
+$$
+\par
+进而定义了阶梯函数$h_{n'}(x)$,对上述$\varepsilon>0$,存在$N>0$,$n'>N$时，有
+$$
+|f(x)-h_{n'}(x)|<\varepsilon
+$$
+\par
+取$n'$充分大，那么对任意$\varepsilon>0$,存在阶梯函数$h(x)=h_{n'}(x)$,满足:
+$$
+\sup_{x\in [a,b]}|f(x)-h(x)|<\dfrac{\varepsilon}{3}
+$$
+\par
+\quad
+\par
+\textbf{为什么最后一步的计算合理？}
+\par
+对于实变复值函数$f(x)=\mathrm{e}^{2\pi k i x}$,最后的计算需要用到Euler公式拆开算再合并.
+$$
+\mathrm{e}^{2\pi k i x}=\cos(2\pi k x)+i \sin(2\pi k x)
+$$
+\end{note}
+
+
+
+
+
+
+
+
+
+\par
+\quad
+\par
+
+
+
+
+
+\begin{problem}
+Exercise 8
+\par
+证明: 对于任意$a\neq 0$, 和$0<\sigma <1$,
+序列$\{an^{\sigma }\mod 1\}$在$[0,1)$上等分布.
+
+\end{problem}
+
+
+\begin{solution}
+\par
+证明:考虑$k \in \mathbb{Z}_{\neq 0} $,直接估计
+\par
+$$
+\begin{aligned}
+&\left|\int_{1}^{N}\mathrm{e}^{2k\pi i a x^{\sigma}}\mathrm{d}x \right|\\
+=&\left|\dfrac{x^{1-\sigma}}{2\pi kia\sigma}\mathrm{e}^{2\pi kia x^{\sigma}}\bigg|^N_1-\int_{1}^{N}\mathrm{e}^{2\pi ki a x^{\sigma}}\dfrac{1-\sigma}{2\pi k i a\sigma}x^{-\sigma}\mathrm{d}x\right|\\
+\leqslant &\left|\dfrac{N^{1-\sigma}\mathrm{e}^{2\pi kiaN^\sigma}-\mathrm{e}^{2\pi kia}}{2\pi kia \sigma}\right|+\dfrac{1-\sigma}{2\pi k|a|\sigma}\int_{1}^{N}x^{-\sigma}\mathrm{d}x\\
+\leqslant &\dfrac{N^{1-\sigma}}{\pi k|a| \sigma}
+\end{aligned}
+$$
+\par
+则$$
+\dfrac{1}{N}\int_{1}^{N}\mathrm{e}^{2k\pi i a x^{\sigma}}\mathrm{d}x=O(N^{-\sigma})
+$$
+\par
+对于
+$$
+\begin{aligned}
+&\left|\sum_{n=1}^{N}\mathrm{e}^{2k\pi i a n^{\sigma}}-\int_{1}^{N}\mathrm{e}^{2k \pi i a x^{\sigma}}\mathrm{d}x \right|\\
+=&\left|\sum_{n=1}^{N}\left(\mathrm{e}^{2k\pi ia n^{\sigma}}-\int_{n}^{n+1}\mathrm{e}^{2k\pi i a x^{\sigma}}\mathrm{d}x\right)+\int_{N}^{N+1}\mathrm{e}^{2k\pi iax^{\sigma}}\mathrm{d}x\right|\\
+\leqslant  & \sum_{n=1}^{N}\int_{n}^{n+1}\left|\mathrm{e}^{2k\pi ia n^{\sigma}}-\mathrm{e}^{2k\pi i a x^{\sigma}}\right|\mathrm{d}x+1\\
+\leqslant &\sum_{n=1}^{N}\int_{n}^{n+1}|\cos 2k\pi a n^\sigma-\cos 2k \pi a x^\sigma|\mathrm{d}x+\sum_{n=1}^{N}\int_{n}^{n+1}|\sin 2k\pi a n^\sigma-\sin 2k \pi a x^\sigma|\mathrm{d}x+1\\
+=&\sum_{n=1}^{N}\int_{n}^{n+1}2k \pi |a| \sigma|n-x|\left( \xi_1^{\sigma-1}|\sin 2k\pi a \xi_1^{\sigma}|+\sigma \xi_2^{\sigma-1}|\cos 2k\pi a \xi_2^{\sigma}|\right)\mathrm{d}x+1 \\
+&\text{其中用到微分中值定理}, \xi_1,\xi_2 \in (n,x)\subset (n,n+1)\\
+\leqslant& \sum_{n=1}^{N}4k\pi |a|\sigma (n+1)^{\sigma-1}+1\\
+\leqslant & CN^{\sigma}
+\end{aligned}
+$$
+\par
+于是
+$$
+\dfrac{1}{N}\sum_{n=1}^{N}\mathrm{e}^{2k\pi ia n^\sigma}-\dfrac{1}{N}\int_{1}^{N}\mathrm{e}^{2k\pi i ax^{\sigma}}\mathrm{d}x=O(N^{\sigma-1})
+$$
+\par
+有估计如下
+$$
+\begin{aligned}
+&\dfrac{1}{N}\sum_{n=1}^{N}\mathrm{e}^{2k\pi ia n^\sigma}\\
+=&\sum_{n=1}^{N}\mathrm{e}^{2k\pi ia n^{\sigma}}-\dfrac{1}{N}\int_{1}^{N}\mathrm{e}^{2k\pi i ax^{\sigma}}\mathrm{d}x+\dfrac{1}{N}\int_{1}^{N}\mathrm{e}^{2k\pi i ax^{\sigma}}\mathrm{d}x\\
+=&O(N^{\sigma-1})+O(N^{-\sigma})\to 0, N \to \infty
+\end{aligned}
+$$
+\par
+利用Weyl准则, 可知$\{an^{\sigma}  \mod 1\}$在$[0,1)$上等分布.
+\end{solution}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{problem}
+Exercise 9
+\par
+证明:
+对于任意$a\in \mathbb{R}$,$\{a\log n \mod 1\}$在$[0,1)$上不是等分布的.
+
+\end{problem}
+
+
+\begin{solution}
+证明:对于$k\in \mathbb{Z}_{\neq 0}$
+\par
+$$
+\begin{aligned}
+&\left|\sum_{n=1}^{N}\mathrm{e}^{2k\pi i a\log n}-\int_{1}^{N}\mathrm{e}^{2k\pi i a\log x}\mathrm{d}x\right|\\
+\leqslant &\left|\sum_{n=1}^{N}\int_{n}^{n+1}(\mathrm{e}^{2k\pi i a\log n}-\mathrm{e}^{2k\pi i a\log x})\mathrm{d}x\right|+\left|\int_{N}^{N+1}\mathrm{e}^{2k\pi i a\log x}\mathrm{d}x\right|\\
+\leqslant &\sum_{n=1}^{N}\int_{n}^{n+1}2k\pi |a||\log n -\log x|\mathrm{d}x+1\\
+=&\sum_{n=1}^{N}\int_{n}^{n+1}2k\pi|a||n-x|\dfrac{1}{\xi_1}\mathrm{d}x+1\\
+&\text{其中用到微分中值定理, $\xi_1\in(n,x)\subset (n,n+1)$}\\
+\leqslant &\sum_{n=1}^{N}2k\pi |a|\dfrac{1}{n}+1\\
+\leqslant& C\log N
+\end{aligned}
+$$
+\par
+那么有:
+$$
+\dfrac{1}{N}\sum_{n=1}^{N}\mathrm{e}^{2k\pi i a\log n}-\dfrac{1}{N}\int_{1}^{N}\mathrm{e}^{2k\pi i a\log x}\mathrm{d}x=O\left(\dfrac{\log N}{N}\right)\to 0, N\to \infty
+$$
+\par
+又有
+$$
+\dfrac{1}{N}\int_{1}^{N}\mathrm{e}^{2k\pi ia \log x}\mathrm{d}x=\dfrac{1}{N}\dfrac{\mathrm{e}^{(2k\pi i a+1)\log N}-1}{2k\pi i a+1}=\dfrac{N^{2k\pi ia}-\dfrac{1}{N}}{2k\pi ia+1} \not \to 0,N\to \infty
+$$
+\par
+则
+$$
+\dfrac{1}{N}\sum_{n=1}^{N}\mathrm{e}^{2k\pi ia \log n}\not \to 0,N\to \infty
+$$
+\par
+利用Weyl准则, $\{a\log n \mod 1\}$不在$[0,1)$上等分布.
+\end{solution}
+
+
+\par
+\quad
+\par
+
+\begin{note}
+    \par
+\textbf{最后极限不存在的说明}.
+\par
+存在$\varepsilon=\dfrac{1}{2\sqrt{1+4k^2\pi^2a^2}}$,任意$N_0\in \mathbb{N}$,存在$N>N_1$,使得:
+$$
+\left|\dfrac{N^{2k\pi ia}-\dfrac{1}{N}}{2k\pi ia+1}-0\right|\geqslant \dfrac{1-\dfrac{1}{N}}{\sqrt{1+4k^2\pi^2a^2}}\geqslant \dfrac{1}{2\sqrt{1+4k^2\pi^2a^2}}=\varepsilon
+$$
+
+\end{note}
+
+
+
+
+
+
+
+
+
+\begin{problem}
+Exercise 11
+\par
+$u(x,t)=(f * H_t)(x)$,其中$H_t(x)$是heat kernel, 证明:
+若$f$是Riemann可积的, 有
+$$
+\lim_{t \to 0}\int_{0}^{1}|u(x,t)-f(x)|^2\mathrm{d}x=0
+$$
+
+\end{problem}
+
+
+\begin{solution}
+证明:
+    \par
+    设$a_n$是$f$的Fourier系数,而且$(f*H_t)(x)=a_n\mathrm{e}^{-4\pi^2n^2t}\mathrm{e}^{2\pi inx}$
+\par
+则改写为  
+$u(x,t)-f(x)=\sum_{n\in \mathbb{Z}}a_n(\mathrm{e}^{-4\pi^2n^2t}-1)\mathrm{e}^{2\pi i nx}$
+\par
+根据Paseval恒等式:
+$$
+\int_{0}^{1}|u(x,t)-f(x)|^2\mathrm{d}x=\sum_{n\in \mathbb{Z}}|a_n|^2|\mathrm{e}^{-4\pi^2n^2t}-1|^2
+$$
+\par
+因为$f$是Riemann可积的,那么$\sum_{n\in \mathbb{Z}}|a_n|^2<\infty$
+\par
+且注意到
+$$
+\sum_{n\in \mathbb{Z}}|a_n|^2|\mathrm{e}^{-4\pi^2n^2t}-1|^2\leqslant 4\sum_{n\in \mathbb{Z}}|a_n|^2
+$$
+\par
+那么根据Weierstrass判别法$\sum_{n\in \mathbb{Z}}|a_n|^2|\mathrm{e}^{-4\pi^2n^2t}-1|^2$关于$t>0$一致收敛.
+\par
+那么,可交换极限和求和次序:
+$$
+\begin{aligned}
+&\lim_{t \to 0}\int_{0}^{1}|u(x,t)-f(x)|^2\mathrm{d}x\\
+=&\lim_{t \to 0}\sum_{n\in \mathbb{Z}}|a_n|^2|\mathrm{e}^{-4\pi^2n^2t}-1|^2\\
+=&\sum_{n\in \mathbb{Z}}\lim_{t \to 0}|a_n|^2|\mathrm{e}^{-4\pi^2n^2t}-1|^2\\
+=&0\\
+\end{aligned}
+$$
+\end{solution}
+
+
+
+
+
+
+\begin{problem}
+Problem 4
+\par
+通过堆积奇点,我们可以得到一种构造处处连续但是无处可微函数的基本方法.
+\par
+考虑函数:
+$$
+\varphi(x)=|x|, \quad \forall x\in [-1,1]
+$$
+\par
+使其周期为$2$,将$\varphi(x)$延拓至$\mathbb{R}$.
+\par
+显然, $\varphi(x)$处处连续且恒有$|\varphi(x)|\leqslant 1$.
+\par
+接着, 我们定义函数:
+$$
+f(x)=\sum_{n=0}^{\infty}\left(\dfrac{3}{4}\right)^n\varphi(4^n x)
+$$
+\par
+显然, $f(x)$是良定义的, 且在$\mathbb{R}$上处处连续.
+\par
+(1)固定$x_0\in \mathbb{R}$,对每个$m\in \mathbb{Z}_{\geqslant 1}$,设$\delta_m=\pm \dfrac{1}{2}4^{-m}$
+.正负号的选取应使得$4^mx_0$和$4^m(x_0+\delta_m)$中没有整数.
+\par
+$$
+\gamma_n=\dfrac{\varphi(4^n(x_0+\delta_m))-\varphi(4^nx_0)}{\delta_m}
+$$
+\par
+证明:若$n>m$,则$\gamma_n=0$; 若$0\leqslant n \leqslant m$, $|\gamma_n|\leqslant 4^n$,且$|\gamma_m|=4^m$
+
+\par
+(2)通过上面观察,证明估计:
+$$
+\left|\dfrac{f(x_0+\delta_m)-f(x_0)}{\delta_m}\right|\geqslant \dfrac{1}{2}(3^m+1)
+$$
+\par
+并说明$f$在$x_0$处不可微,且说明此构造满足要求.
+
+
+
+
+
+
+\end{problem}
+
+
+\begin{solution}
+\par
+(1)     证明:
+\par
+若$n>m$,则$4^n\delta_m$是$2$的倍数, 那么$\varphi(4^n(x_0+\delta_m))=\varphi(4^nx_0)$,则$\gamma_n=0$.
+\par
+若$0\leqslant n \leqslant m$, 特殊的$n=m$时,根据线性,$4^m(x_0+\delta_m)$和$4^mx_0$差值绝对值为$\dfrac{1}{2}$,那么:
+$$
+|\gamma_m|=\dfrac{|\varphi(4^m(x_0+\delta_m))-\varphi(4^mx_0)|}{\dfrac{1}{2}4^{-m}}=\dfrac{\dfrac{1}{2}}{\dfrac{1}{2}4^{-m}}=4^m
+$$
+\par
+$0\leqslant n<m$,根据线性,$4^n(x_0+\delta_m)$和$4^nx_0$差值绝对值为$\dfrac{1}{2}4^{n-m}$,那么:
+$$
+|\gamma_n|=\dfrac{|\varphi(4^n(x_0+\delta_m))-\varphi(4^nx_0)|}{\dfrac{1}{2}4^{-m}}\leqslant \dfrac{\dfrac{1}{2}4^{n-m}}{\dfrac{1}{2}4^{-m}}=4^n
+$$
+\par
+(2)    证明:
+\par
+$$
+\begin{aligned}
+&\left|\dfrac{f(x_0+\delta_m)-f(x_0)}{\delta_m}\right|\\
+=&\left|\sum_{n=0}^{\infty}\left(\dfrac{3}{4}\right)^n\dfrac{\varphi(4^n(x_0+\delta_m))-\varphi(4^nx_0)}{\delta_m}\right|\\
+=&\left|\sum_{n=0}^{\infty}\left(\dfrac{3}{4}\right)^n\gamma_n\right|\\
+=&\left|\sum_{n=0}^{m}\left(\dfrac{3}{4}\right)^n\gamma_n\right|\\
+\geqslant& \dfrac{3^m}{4^m}\cdot |\gamma_m|-\sum_{n=0}^{m-1}\left(\dfrac{3}{4}\right)^n|\gamma_n|\\
+\geqslant & \dfrac{3^m}{4^m}\cdot 4^m-\sum_{n=0}^{m-1}\dfrac{3^n}{4^n}\cdot 4^n\\
+=&3^m-\dfrac{3^m-1}{2}\\
+=&\dfrac{3^m+1}{2}\to \infty, m \to \infty
+\end{aligned}
+$$
+\par
+$f$在$x_0$处不可微,根据$x_0$的任意性,$f$处处连续但处处不可微.
+\end{solution}
+
+
+
+\end{document}
